@@ -18,11 +18,7 @@ int main ()
     unsigned char imgGB_16bbp[height][width][PIXEL_16BPP];
     char* imgGB_16bbpFileName = (char*) "bitmapimgGB_16bbp.bmp";
 
-    int x = 265;
-    unsigned char c1 = (unsigned char)(x);
-    unsigned char c2 = (unsigned char)(x >> 8);
-    printf("%X ", c1);
-    printf("%X, \n", c2);
+
 
     // Generating RGB imgRGB sample
     int i, j;

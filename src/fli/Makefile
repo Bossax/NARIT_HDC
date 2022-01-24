@@ -5,21 +5,39 @@ FLI_LIBS = -L$(FLI_PREFIX)/lib -lfli -lm
 
 CC = gcc
 CFLAGS = -Wall -O2 -g
-ODIR = ./build/
-SDIR = .
+ODIR = ./build
 OBJ = acquisition.o
-OUTPUTNAME = acquisition
-OUTDIR = /opt/fli/example
+
+SOURCE_DIR = ./
+SOURCE_NAME = acquisition.c
 MKDIR = mkdir -p
 
+OUTPUT_NAME = acquisition
 OUTPUT_DIR = ./build/
+
 BMP_DIR = -I./bmp/build
 
-${OUTPUTNAME}: ${OBJ} bmp.o
-	${CC} ${CFLAGS} -o ${OUTPUT_DIR}${OUTPUTNAME} ${ODIR}${OBJ} bmp/bmp.o ${FLI_LIBS} 
+.PHONY: test_bmp clean
 
-${OBJ}: ${OUTPUTNAME}.c
-	${CC} ${FLI_DEFS} ${BMP_DIR} -Wall -c ${OUTPUTNAME}.c -o ./build/${OBJ}
+$(OUTPUT_NAME): $(OBJ) bmp.o
+	$(CC) $(CFLAGS) -o $(OUTPUT_DIR)$(OUTPUT_NAME) $(ODIR)/$(OBJ) $(ODIR)/bmp.o $(FLI_LIBS)
 
-bmp.o:
-	${CC} -Wall -c ./bmp/bmp.c -o ./bmp/bmp.o
+$(OBJ): $(SOURCE_NAME)
+	$(CC) $(FLI_DEFS) $(BMP_DIR) -Wall -c $(SOURCE_NAME) -o ./build/$(OBJ)
+
+test_bmp: bmp
+	echo "generate bmp images"
+	./build/bmp
+
+bmp: bmp.o
+		${CC} ${CFLAGS} bmp_test.c -o $(OUTPUT_DIR)bmp $(ODIR)/bmp.o -lm
+
+bmp.o: bmp.c |$(ODIR)
+	$(CC) -Wall -c bmp.c -o $(ODIR)/bmp.o
+
+$(ODIR):
+		$(MKDIR) $(ODIR)
+
+clean:
+	rm -f $(OUTPUT_DIR)/*
+	rm -f *.bmp

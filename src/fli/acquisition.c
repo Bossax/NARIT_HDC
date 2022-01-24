@@ -6,7 +6,7 @@
 #include "libfli-mem.h"
 #include "libfli-camera-usb.h"
 #include <stdlib.h>
-#include "bmp/bmp.h"
+#include "bmp.h"
 
 #define MAX_STR_LENGTH 100
 const flibitdepth_t bitdepth = FLI_MODE_8BIT;

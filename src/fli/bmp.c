@@ -39,6 +39,8 @@ void generateBitmapImage (unsigned char* image, int height, int width, int byteP
         unsigned char *colorTable = (unsigned char*) calloc(colorByte, sizeof(unsigned char));
         fillColorTable(colorTable, colorByte , bytePerPixel);
         fwrite(colorTable, 1, colorByte, imageFile);
+
+        /*
         if(bytePerPixel == 2){
             printf("check color table\n");
             for(int k = 1240; k <1250; k ++){
@@ -50,6 +52,7 @@ void generateBitmapImage (unsigned char* image, int height, int width, int byteP
 
             }
         }
+        */
 
         unsigned char padding[3] = {0,0,0};
         for (i = 0; i < height; i++) {
