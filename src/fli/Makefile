@@ -39,5 +39,5 @@ $(ODIR):
 		$(MKDIR) $(ODIR)
 
 clean:
-	rm -f $(OUTPUT_DIR)/*
+	rm -f $(OUTPUT_DIR)*
 	rm -f *.bmp

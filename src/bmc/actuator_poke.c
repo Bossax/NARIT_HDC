@@ -68,12 +68,6 @@ BMCRC test_poke(DM *hdm, uint32_t *map_lut, double delay)
 
 		test_array[k] = 0; // clear the command of kth actuator
 		Sleep_us(delay);
-
-		// read input in the IO buffer
-		ch = getch();
-		if('X' == toupper(ch)){
-			break;
-		}
 	}
 		printf("\n");
 		printf("Poke test complete. %d errors.\n", err_count);
@@ -94,7 +88,7 @@ int main(int argc, char* argv[])
 	int select = 0;
 	int err_count = 0;					 // error count for the entire program
 	int pistons = 10;						// number actuators used in the initial test
-	int delay_us = 500;					// msec
+	int delay_us = 500000;					// microsec
   char ch = '\0';							// store IO input
 
 	bool_t auto_exit = FALSE;
@@ -138,10 +132,7 @@ int main(int argc, char* argv[])
 	// initial test
 	for(k=0; k < pistons; k++) {
 		Sleep_us((double)delay_us);
-		ch = getch();
-		if ('X' == toupper(ch)){
-			break;
-		}
+
 
 		// Alternate between the two piston values
 		switch(select) {

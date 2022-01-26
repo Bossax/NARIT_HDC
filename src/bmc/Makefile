@@ -17,7 +17,7 @@ OUTPUT_DIR = ./build/
 .PHONY: clean
 
 $(OUTPUTNAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $(OUTPUT_DIR)$(OUTPUTNAME) $(ODIR)/$(OBJ) $(BMC_LIBS)
+	$(CC) $(CFLAGS) -o $(OUTPUT_DIR)$(OUTPUTNAME) $(ODIR)/$(OBJ) $(BMC_LIBS) -Wl,-rpath-link=$(BMC_PREFIX)/lib
 
 $(OBJ): $(SOURCE_NAME) | $(ODIR)
 	$(CC) $(BMC_DEFS) -Wall -c $(SOURCE_DIR)$(SOURCE_NAME) -o ./build/$(OBJ)
